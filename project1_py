@@ -1,1 +1,10 @@
-
+#menu_and_app_controller
+def show menu():
+	print("=== 📚 Study Tracker ===")
+	print("1. Add new study")
+	print("2. Viewrecords")
+	print("3. Delete all records")
+	print("4. Set goal")
+	print("5. Check goal")
+	print("6. Show achievements")
+	print("7. Exit\n")
