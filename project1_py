@@ -1,1 +1,12 @@
+#fileOperations_and_ basicFunctions
 
+DATA_FILE = "studies.txt"
+GOAL_FILE = "goal.txt"
+CONGRATS_FILE = "congrats.txt"
+
+def clean(text):
+    return text.strip()
+
+def ensure_file(path):
+    with open(path, "a", encoding="utf-8"):
+        pass
