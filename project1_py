@@ -1,1 +1,7 @@
-
+def clear_records():
+    confirm = clean(input("Delete all records? (Y/N): ")).lower()
+    if confirm == "y":
+        rewrite_file(DATA_FILE, "")
+        print("Records deleted.")
+    else:
+        print("Operation canceled.")
