@@ -1,1 +1,11 @@
+def view_records():
+    lines = read_lines(DATA_FILE)
+    if len(lines) == 0:
+       print("No records.")
+       return
+
+    total = 0
+    longest = 0
+    longest_subject = ""
+    count = 0
 
