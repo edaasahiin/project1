@@ -44,7 +44,7 @@ def main():
 
 	while True:
 		show_menu()
-		choice = clean(input("Choice: ")
+		choice = clean(input("Choice: "))
 		if choice == "1":
 			add_study()
 		elif choice == "2":
@@ -60,7 +60,7 @@ def main():
 		elif choice == "7":
 			print("Goodbye. 👋🏻")
 			break
-		else
+		else:
 			print("Invalid choice.")
 
 if_name_ == "_main_":
