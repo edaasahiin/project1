@@ -1,4 +1,4 @@
-#addsuccessandwork
+#addSuccess_and_work
 def show_achievements():
   records=
 read_lines(CONGRATS_FILE)
