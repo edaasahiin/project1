@@ -10,3 +10,13 @@ def clean(text):
 def ensure_file(path):
     with open(path, "a", encoding="utf-8"):
         pass
+
+def read_lines(path):
+    ensure_file(path)
+    lines = []
+    with open(path, "r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if line:
+                lines.append(line)
+    return lines
