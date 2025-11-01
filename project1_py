@@ -31,11 +31,11 @@ def view_records():
     else:
         average = 0
 
-     print(f"Total time: {total} min")
-     print(f"Average: {round(average,1)} min")
-     if longest > 0:
+    print(f"Total time: {total} min")
+    print(f"Average: {round(average,1)} min")
+    if longest > 0:
         print(f"Longest study: {longest_subject} ({longest} min)")
-     else:
+    else:
         print("Longest study: -")
 
 
