@@ -20,9 +20,31 @@ if goal == 0:
 print(f"Total time: {total} min")
 print(f"Goal: {goal} min")
 if total >= goal:
-	print("Goal reached!💪🏻)
+	print("Goal reached!💪🏻")
 	append_line(CONGRATS_FILE, f"Goal reached: {total} min")
 else:
 	remaining = goal - total
 	progress = (total / goal) * 100
 	print(f"{remaining} min remaining, progress: {round(progress,1)}%")
+
+
+def show_menu():
+	print("1. Add study")
+	print("2. View records")	
+	print("3. Clear records")
+	print("4. Set goal")
+	print("5. Check goal")
+	print("6. Show achievements")
+	print("7. Exit")
+
+
+
+
+
+
+
+
+
+
+
+
