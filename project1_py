@@ -38,7 +38,37 @@ def show_menu():
 	print("7. Exit")
 
 
+def main():
+	name = input("Name: ")
+	print(f"Hello, {name} 🌸")
 
+	while True:
+		show_menu()
+		choice = clean(input("Choice: ")
+		if choice == "1":
+			add_study()
+		elif choice == "2":
+			view_records()
+		elif choice == "3":
+			clear_records()
+		elif choice == "4":
+			set_goal()
+		elif choice == "5":
+			check_goal()
+		elif choice == "6":
+			show_achievements()
+		elif choice == "7":
+			print("Goodbye. 👋🏻")
+			break
+		else
+			print("Invalid choice.")
+
+if_name_ == "_main_":
+	main()
+
+		
+
+			
 
 
 
