@@ -26,9 +26,9 @@ def view_records():
         else:
            print(f"{idx}. {line} (unreadable)")
 
-     if count > 0:
+    if count > 0:
         average = total / count
-     else:
+    else:
         average = 0
 
      print(f"Total time: {total} min")
