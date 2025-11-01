@@ -26,4 +26,16 @@ def view_records():
         else:
            print(f"{idx}. {line} (unreadable)")
 
+     if count > 0:
+        average = total / count
+     else:
+        average = 0
+
+     print(f"Total time: {total} min")
+     print(f"Average: {round(average,1)} min")
+     if longest > 0:
+        print(f"Longest study: {longest_subject} ({longest} min)")
+     else:
+        print("Longest study: -")
+
 
