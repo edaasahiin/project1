@@ -1,7 +1,6 @@
 #addSuccess_and_work
 def show_achievements():
-  records=
-read_lines(CONGRATS_FILE)
+  records = read_lines(CONGRATS_FILE)
   if len(records)>0:
       for record in records:
         print(record)
