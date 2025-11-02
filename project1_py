@@ -1,126 +1,39 @@
-#addSuccess_and_work
-def show_achievements():
-  records = read_lines(CONGRATS_FILE)
-  if len(records)>0:
-      for record in records:
-        print(record)
-  else:
-    print("No achievements yet.")
-
-def add_study():
-  subject=clean(input("Subject:"))
-  duration=clean(input("Duration(minutes):"))
-  if subject==""or duration ==""or not duration.isdigit():
-     print("Invalid input.")
-  else:
-    append_line(DATA_FILE,subject+"|"+duration)
-    print("Study added.")
-
-#Target control, menu and main loop
-def check_goal():
+#recordViewing_and_statistics
+def view_records():
     lines = read_lines(DATA_FILE)
     if len(lines) == 0:
-        print("No studies yet.")
-        return
+       print("No records.")
+       return
 
     total = 0
-    for line in lines:
+    longest = 0
+    longest_subject = ""
+    count = 0
+
+    for idx, line in enumerate(lines, start=1):
         parts = line.split("|")
         if len(parts) == 2:
-            dur_text = clean(parts[1])
-            if dur_text.isdigit():
-                total += int(dur_text)
+           subject = clean(parts[0])
+           dur_text = clean(parts[1])
+           if dur_text.isdigit():
+              minutes = int(dur_text)
+              total += minutes
+              count += 1
+              if minutes > longest:
+                 longest = minutes
+                 longest_subject = subject
+           print(f"{idx}. {subject} - {dur_text} min")
+        else:
+           print(f"{idx}. {line} (unreadable)")
 
-    goal = read_goal()
-    if goal == 0:
-        print("No goal set.")
-        return
+    if count > 0:
+        average = total / count
+    else:
+        average = 0
 
     print(f"Total time: {total} min")
-    print(f"Goal: {goal} min")
-    if total >= goal:
-        print("Goal reached!💪🏻")
-        append_line(CONGRATS_FILE, f"Goal reached: {total} min")
+    print(f"Average: {round(average,1)} min")
+    if longest > 0:
+        print(f"Longest study: {longest_subject} ({longest} min)")
     else:
-        remaining = goal - total
-        progress = (total / goal) * 100
-        print(f"{remaining} min remaining, progress: {round(progress, 1)}%")
-
-
-def add_study():
-  subject=clean(input("Subject:"))
-  duration=clean(input("Duration(minutes):"))
-  if subject==""or duration ==""or not duration.isdigit():
-     print("Invalid input.")
-  else:
-    append_line(DATA_FILE,subject+"|"+duration)
-    print("Study added.")
-
-def show_menu():
-    print("1. Add study")
-    print("2. View records")	
-    print("3. Clear records")
-    print("4. Set goal")
-    print("5. Check goal")
-    print("6. Show achievements")
-    print("7. Exit")
-
-
-def main():
-    name = input("Name: ")
-    print(f"Hello, {name} 🌸")
-
-    while True:
-        show_menu()
-        choice = clean(input("Choice: "))
-        if choice == "1":
-            add_study()
-        elif choice == "2":
-            view_records()
-        elif choice == "3":
-            clear_records()
-        elif choice == "4":
-            set_goal()
-        elif choice == "5":
-            check_goal()
-        elif choice == "6":
-            show_achievements()
-        elif choice == "7":
-            print("Goodbye. 👋🏻")
-            break
-        else:
-            print("Invalid choice.")
-
-
-if __name__ == "__main__":
-    main()
-
-#fileOperations_and_ basicFunctions
-DATA_FILE = "studies.txt"
-GOAL_FILE = "goal.txt"
-CONGRATS_FILE = "congrats.txt"
-
-def clean(text):
-    return text.strip()
-
-def ensure_file(path):
-    with open(path, "a", encoding="utf-8"):
-        pass
-
-def read_lines(path):
-    ensure_file(path)
-    lines = []
-    with open(path, "r", encoding="utf-8") as f:
-        for line in f:
-            line = line.strip()
-            if line:
-                lines.append(line)
-    return lines
-
-def append_line(path, text):
-    with open(path, "a", encoding="utf-8") as f:
-        f.write(text + "\n")
-
-def rewrite_file(path, text):
-    with open(path, "w", encoding="utf-8") as f:
-        f.write(text)
+        print("Longest study: -")
