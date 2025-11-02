@@ -68,4 +68,32 @@ def main():
 if __name__ == "__main__":
     main()
 
+#fileOperations_and_ basicFunctions
+DATA_FILE = "studies.txt"
+GOAL_FILE = "goal.txt"
+CONGRATS_FILE = "congrats.txt"
 
+def clean(text):
+    return text.strip()
+
+def ensure_file(path):
+    with open(path, "a", encoding="utf-8"):
+        pass
+
+def read_lines(path):
+    ensure_file(path)
+    lines = []
+    with open(path, "r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if line:
+                lines.append(line)
+    return lines
+
+def append_line(path, text):
+    with open(path, "a", encoding="utf-8") as f:
+        f.write(text + "\n")
+
+def rewrite_file(path, text):
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(text)
