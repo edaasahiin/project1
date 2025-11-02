@@ -36,4 +36,52 @@ def view_records():
     if longest > 0:
         print(f"Longest study: {longest_subject} ({longest} min)")
     else:
+        remaining = goal - total
+        progress = (total / goal) * 100
+        print(f"{remaining} min remaining, progress: {round(progress, 1)}%")
+
+
+def show_menu():
+    print("1. Add study")
+    print("2. View records")	
+    print("3. Clear records")
+    print("4. Set goal")
+    print("5. Check goal")
+    print("6. Show achievements")
+    print("7. Exit")
+
+
+def main():
+    name = input("Name: ")
+    print(f"Hello, {name} 🌸")
+
+    while True:
+        show_menu()
+        choice = clean(input("Choice: "))
+        if choice == "1":
+            add_study()
+        elif choice == "2":
+            view_records()
+        elif choice == "3":
+            clear_records()
+        elif choice == "4":
+            set_goal()
+        elif choice == "5":
+            check_goal()
+        elif choice == "6":
+            show_achievements()
+        elif choice == "7":
+            print("Goodbye. 👋🏻")
+            break
+        else:
+            print("Invalid choice.")
+
+
+if __name__ == "__main__":
+    main()
+
+
+def rewrite_file(path, text):
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(text)
         print("Longest study: -")
