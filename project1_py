@@ -1,30 +1,17 @@
-#fileOperations_and_ basicFunctions
+#addSuccess_and_work
+def show_achievements():
+  records = read_lines(CONGRATS_FILE)
+  if len(records)>0:
+      for record in records:
+        print(record)
+  else:
+    print("No achievements yet.")
 
-DATA_FILE = "studies.txt"
-GOAL_FILE = "goal.txt"
-CONGRATS_FILE = "congrats.txt"
-
-def clean(text):
-    return text.strip()
-
-def ensure_file(path):
-    with open(path, "a", encoding="utf-8"):
-        pass
-
-def read_lines(path):
-    ensure_file(path)
-    lines = []
-    with open(path, "r", encoding="utf-8") as f:
-        for line in f:
-            line = line.strip()
-            if line:
-                lines.append(line)
-    return lines
-
-def append_line(path, text):
-    with open(path, "a", encoding="utf-8") as f:
-        f.write(text + "\n")
-
-def rewrite_file(path, text):
-    with open(path, "w", encoding="utf-8") as f:
-        f.write(text)
+def add_study():
+  subject=clean(input("Subject:"))
+  duration=clean(input("Duration(minutes):"))
+  if subject==""or duration ==""or not duration.isdigit():
+     print("Invalid input.")
+  else:
+    append_line(DATA_FILE,subject+"|"+duration)
+    print("Study added.")
