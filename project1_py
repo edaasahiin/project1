@@ -1,28 +1,40 @@
-#Target control, menu and main loop
-def check_goal():
+#recordViewing_and_statistics
+def view_records():
     lines = read_lines(DATA_FILE)
     if len(lines) == 0:
-        print("No studies yet.")
-        return
+       print("No records.")
+       return
 
     total = 0
-    for line in lines:
+    longest = 0
+    longest_subject = ""
+    count = 0
+
+    for idx, line in enumerate(lines, start=1):
         parts = line.split("|")
         if len(parts) == 2:
-            dur_text = clean(parts[1])
-            if dur_text.isdigit():
-                total += int(dur_text)
+           subject = clean(parts[0])
+           dur_text = clean(parts[1])
+           if dur_text.isdigit():
+              minutes = int(dur_text)
+              total += minutes
+              count += 1
+              if minutes > longest:
+                 longest = minutes
+                 longest_subject = subject
+           print(f"{idx}. {subject} - {dur_text} min")
+        else:
+           print(f"{idx}. {line} (unreadable)")
 
-    goal = read_goal()
-    if goal == 0:
-        print("No goal set.")
-        return
+    if count > 0:
+        average = total / count
+    else:
+        average = 0
 
     print(f"Total time: {total} min")
-    print(f"Goal: {goal} min")
-    if total >= goal:
-        print("Goal reached!💪🏻")
-        append_line(CONGRATS_FILE, f"Goal reached: {total} min")
+    print(f"Average: {round(average,1)} min")
+    if longest > 0:
+        print(f"Longest study: {longest_subject} ({longest} min)")
     else:
         remaining = goal - total
         progress = (total / goal) * 100
@@ -72,3 +84,4 @@ if __name__ == "__main__":
 def rewrite_file(path, text):
     with open(path, "w", encoding="utf-8") as f:
         f.write(text)
+        print("Longest study: -")
