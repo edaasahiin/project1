@@ -1,3 +1,4 @@
+#registryClearing_and_goalSetting
 def clear_records():
     confirm = clean(input("Delete all records? (Y/N): ")).lower()
     if confirm == "y":
@@ -5,3 +6,22 @@ def clear_records():
         print("Records deleted.")
     else:
         print("Operation canceled.")
+
+def set_goal():
+    goal = clean(input("Weekly goal (minutes): "))
+    if goal.isdigit() and int(goal) > 0:
+        rewrite_file(GOAL_FILE, goal)
+        print("Goal saved.")
+    else:
+        print("Invalid goal.")
+
+def read_goal():
+    lines = read_lines(GOAL_FILE)
+    if len(lines) == 0:
+        return 0
+    first = clean(lines[0])
+    if first.isdigit() and int(first) > 0:
+        return int(first)
+    else:
+        return 0
+       
