@@ -15,4 +15,3 @@ def add_study():
   else:
     append_line(DATA_FILE,subject+"|"+duration)
     print("Study added.")
-.
