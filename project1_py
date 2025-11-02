@@ -46,5 +46,45 @@ def add_study():
     append_line(DATA_FILE,subject+"|"+duration)
     print("Study added.")
 
+#recordViewing_and_statistics
+def view_records():
+    lines = read_lines(DATA_FILE)
+    if len(lines) == 0:
+       print("No records.")
+       return
+
+    total = 0
+    longest = 0
+    longest_subject = ""
+    count = 0
+
+    for idx, line in enumerate(lines, start=1):
+        parts = line.split("|")
+        if len(parts) == 2:
+           subject = clean(parts[0])
+           dur_text = clean(parts[1])
+           if dur_text.isdigit():
+              minutes = int(dur_text)
+              total += minutes
+              count += 1
+              if minutes > longest:
+                 longest = minutes
+                 longest_subject = subject
+           print(f"{idx}. {subject} - {dur_text} min")
+        else:
+           print(f"{idx}. {line} (unreadable)")
+
+    if count > 0:
+        average = total / count
+    else:
+        average = 0
+
+    print(f"Total time: {total} min")
+    print(f"Average: {round(average,1)} min")
+    if longest > 0:
+        print(f"Longest study: {longest_subject} ({longest} min)")
+    else:
+        print("Longest study: -")
+
 
 
