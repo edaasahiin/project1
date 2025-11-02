@@ -1,18 +1,1 @@
-#addSuccess_and_work
-def show_achievements():
-  records = read_lines(CONGRATS_FILE)
-  if len(records)>0:
-      for record in records:
-        print(record)
-  else:
-    print("No achievements yet.")
-
-def add_study():
-  subject=clean(input("Subject:"))
-  duration=clean(input("Duration(minutes):"))
-  if subject==""or duration ==""or not duration.isdigit():
-     print("Invalid input.")
-  else:
-    append_line(DATA_FILE,subject+"|"+duration)
-    print("Study added.")
 
