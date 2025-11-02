@@ -47,6 +47,15 @@ def check_goal():
         print(f"{remaining} min remaining, progress: {round(progress, 1)}%")
 
 
+def add_study():
+  subject=clean(input("Subject:"))
+  duration=clean(input("Duration(minutes):"))
+  if subject==""or duration ==""or not duration.isdigit():
+     print("Invalid input.")
+  else:
+    append_line(DATA_FILE,subject+"|"+duration)
+    print("Study added.")
+
 def show_menu():
     print("1. Add study")
     print("2. View records")	
