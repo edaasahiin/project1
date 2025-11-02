@@ -1,5 +1,4 @@
 #fileOperations_and_ basicFunctions
-
 DATA_FILE = "studies.txt"
 GOAL_FILE = "goal.txt"
 CONGRATS_FILE = "congrats.txt"
