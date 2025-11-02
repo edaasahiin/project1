@@ -16,3 +16,102 @@ def add_study():
     append_line(DATA_FILE,subject+"|"+duration)
     print("Study added.")
 
+#Target control, menu and main loop
+def check_goal():
+    lines = read_lines(DATA_FILE)
+    if len(lines) == 0:
+        print("No studies yet.")
+        return
+
+    total = 0
+    for line in lines:
+        parts = line.split("|")
+        if len(parts) == 2:
+            dur_text = clean(parts[1])
+            if dur_text.isdigit():
+                total += int(dur_text)
+
+    goal = read_goal()
+    if goal == 0:
+        print("No goal set.")
+        return
+
+    print(f"Total time: {total} min")
+    print(f"Goal: {goal} min")
+    if total >= goal:
+        print("Goal reached!💪🏻")
+        append_line(CONGRATS_FILE, f"Goal reached: {total} min")
+    else:
+        remaining = goal - total
+        progress = (total / goal) * 100
+        print(f"{remaining} min remaining, progress: {round(progress, 1)}%")
+
+
+def show_menu():
+    print("1. Add study")
+    print("2. View records")	
+    print("3. Clear records")
+    print("4. Set goal")
+    print("5. Check goal")
+    print("6. Show achievements")
+    print("7. Exit")
+
+
+def main():
+    name = input("Name: ")
+    print(f"Hello, {name} 🌸")
+
+    while True:
+        show_menu()
+        choice = clean(input("Choice: "))
+        if choice == "1":
+            add_study()
+        elif choice == "2":
+            view_records()
+        elif choice == "3":
+            clear_records()
+        elif choice == "4":
+            set_goal()
+        elif choice == "5":
+            check_goal()
+        elif choice == "6":
+            show_achievements()
+        elif choice == "7":
+            print("Goodbye. 👋🏻")
+            break
+        else:
+            print("Invalid choice.")
+
+
+if __name__ == "__main__":
+    main()
+
+#fileOperations_and_ basicFunctions
+DATA_FILE = "studies.txt"
+GOAL_FILE = "goal.txt"
+CONGRATS_FILE = "congrats.txt"
+
+def clean(text):
+    return text.strip()
+
+def ensure_file(path):
+    with open(path, "a", encoding="utf-8"):
+        pass
+
+def read_lines(path):
+    ensure_file(path)
+    lines = []
+    with open(path, "r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if line:
+                lines.append(line)
+    return lines
+
+def append_line(path, text):
+    with open(path, "a", encoding="utf-8") as f:
+        f.write(text + "\n")
+
+def rewrite_file(path, text):
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(text)
